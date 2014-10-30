@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+	<meta charset="UTF-8">
+	<title>Countdown to Q!</title>
+	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.17.2/build/cssreset/cssreset-min.css">
+	<link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+	<style>
+		body {
+			font-family: 'Oswald', cursive;
+			background: #fcf;
+			text-align: center;
+			font-size: 36px;
+			color: red;
+		}
+	</style>
+</head>
+<body>
+	<div id="canvasFrame" style="background-image:url(1.jpg);background-repeat: no-repeat;">
+		<canvas id="mycanvas" width="200" height="100"style="position:absolute;background-color:rgba(255,255,255,0.7);">
+			Canvasに対応したブラウザを使ってください。
+		</canvas>
+	</div>
+	<script src="./lib.js"></script>
+	<script>
+	window.onload = function() {
+		draw();
+	}
+	function draw() {
+		var canvas = document.getElementById('mycanvas');
+		
+		console.log(window.innerWidth);
+		console.log(window.outerWidth);
+		console.log($(document).width());
+		
+		$('#canvasFrame').width(window.innerWidth);
+		$('#canvasFrame').height(window.innerHeight);
+		
+		canvas.style.left = '150px';
+		canvas.style.top = '500px';
+		
+		if (!canvas || !canvas.getContext('2d')) { return false; }
+		var ctx = canvas.getContext('2d');
+		
+		ctx.font = '51px Oswald';
+		ctx.textAlign = 'center';
+		ctx.textBaseline = 'middle';
+		ctx.fillStyle = 'red';
+		
+		var minit='';
+		(function loop() {
+		
+		
+		if(new Date().getMinutes()!==minit){
+			minit = new Date().getMinutes();
+			// 総数分の数の配列を用意して、一個ずつランダムで選んで使ったら消す。空になったら繰り返す
+			var num = uniqueRandom(num, 2);
+			var prof;
+			$.get(num+".json", function(data){
+				prof = data;
+				console.log(data);
+			$('#canvasFrame').css('background-image', 'url(' + prof.file);
+			
+			canvas.style.left = prof.left+'px';
+			canvas.style.top = prof.top+'px';
+			});
+
+
+		}
+		
+		
+			ctx.clearRect(0,0,canvas.width,canvas.height);
+			
+			var time = new Date();
+			var text = padZero(time.getHours())+':'+padZero(time.getMinutes())+':'+padZero(time.getSeconds());
+
+			ctx.fillText(text, 100, 50);
+
+			setTimeout(loop, 200);
+		})();
+		
+	}
+	</script>
+
+</body>
+</html>
