@@ -2,7 +2,7 @@
 <html lang="ja-JP">
 <head>
 	<meta charset="UTF-8">
-	<title>Countdown to Q!</title>
+	<title>T</title>
 	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.17.2/build/cssreset/cssreset-min.css">
 	<link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
 	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -17,19 +17,28 @@
 	</style>
 </head>
 <body>
-	<div id="canvasFrame" style="background-image:url(1.jpg);background-repeat: no-repeat;">
+	<div id="canvasFrame" style="background-image:url(1.jpg);background-size: contain;background-repeat: no-repeat;">
 		<canvas id="mycanvas" width="200" height="100"style="position:absolute;background-color:rgba(255,255,255,0.7);">
 			Canvasに対応したブラウザを使ってください。
 		</canvas>
 	</div>
 	<script src="./lib.js"></script>
 	<script>
+	var conf;
 	window.onload = function() {
-		draw();
+		$.get("app.json", function(data){
+			conf = data;
+			draw();
+		});
 	}
 	function draw() {
 		var canvas = document.getElementById('mycanvas');
 		
+		console.log(conf);
+		
+		var imgArray = getArray(conf.count);
+		
+		// console.log(imgArray);
 		console.log(window.innerWidth);
 		console.log(window.outerWidth);
 		console.log($(document).width());
@@ -55,16 +64,24 @@
 		if(new Date().getMinutes()!==minit){
 			minit = new Date().getMinutes();
 			// 総数分の数の配列を用意して、一個ずつランダムで選んで使ったら消す。空になったら繰り返す
-			var num = uniqueRandom(num, 2);
+			console.log(imgArray.length);
+			if(!imgArray.length){
+				imgArray = getArray(conf.count);
+			}
+			// var num = uniqueRandom(num, 4);
+			var num = getRandom(imgArray.length);
+			console.log(num);
 			var prof;
-			$.get(num+".json", function(data){
+			$.get(imgArray[num]+".json", function(data){
 				prof = data;
-				console.log(data);
+			//	console.log(data);
 			$('#canvasFrame').css('background-image', 'url(' + prof.file);
 			
 			canvas.style.left = prof.left+'px';
 			canvas.style.top = prof.top+'px';
 			});
+			imgArray.splice(num,1)
+			console.log(imgArray);
 
 
 		}

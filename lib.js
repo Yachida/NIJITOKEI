@@ -8,3 +8,18 @@ function uniqueRandom(n, m){
   }
   return result;
 }
+
+function getRandom(n){
+  console.log(n);
+  var result = Math.floor((Math.random()*n));
+  console.log(result);
+  return result;
+}
+
+function getArray(count){
+  var tmpArr = [];
+	for (var i = 0; i < count; i++) {
+		tmpArr.push( i+1 );
+	}
+	return tmpArr
+}
