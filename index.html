@@ -17,7 +17,7 @@
 	</style>
 </head>
 <body>
-	<div id="canvasFrame" style="background-image:url(1.jpg);background-size: contain;background-repeat: no-repeat;">
+	<div id="canvasFrame" style="background-size: contain;background-repeat: no-repeat;">
 		<canvas id="mycanvas" width="200" height="100"style="position:absolute;background-color:rgba(255,255,255,0.7);">
 			Canvasに対応したブラウザを使ってください。
 		</canvas>
@@ -38,7 +38,6 @@
 		
 		var imgArray = getArray(conf.count);
 		
-		// console.log(imgArray);
 		console.log(window.innerWidth);
 		console.log(window.outerWidth);
 		console.log($(document).width());
@@ -63,26 +62,21 @@
 		
 		if(new Date().getMinutes()!==minit){
 			minit = new Date().getMinutes();
-			// 総数分の数の配列を用意して、一個ずつランダムで選んで使ったら消す。空になったら繰り返す
-			console.log(imgArray.length);
+			
 			if(!imgArray.length){
 				imgArray = getArray(conf.count);
 			}
-			// var num = uniqueRandom(num, 4);
 			var num = getRandom(imgArray.length);
-			console.log(num);
 			var prof;
 			$.get(imgArray[num]+".json", function(data){
 				prof = data;
-			//	console.log(data);
-			$('#canvasFrame').css('background-image', 'url(' + prof.file);
-			
-			canvas.style.left = prof.left+'px';
-			canvas.style.top = prof.top+'px';
+				
+				$('#canvasFrame').css('background-image', 'url(' + prof.file);
+				
+				canvas.style.left = prof.left+'px';
+				canvas.style.top = prof.top+'px';
 			});
 			imgArray.splice(num,1)
-			console.log(imgArray);
-
 
 		}
 		
