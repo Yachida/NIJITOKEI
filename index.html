@@ -18,7 +18,7 @@
 </head>
 <body>
 	<div id="canvasFrame" style="background-size: contain;background-repeat: no-repeat;">
-		<canvas id="mycanvas" width="200" height="100"style="position:absolute;background-color:rgba(255,255,255,0.7);">
+		<canvas id="mycanvas" width="200" height="100"style="position:absolute;background-color:rgba(255,153,153,0.7);">
 			Canvasに対応したブラウザを使ってください。
 		</canvas>
 	</div>
@@ -51,14 +51,8 @@
 		if (!canvas || !canvas.getContext('2d')) { return false; }
 		var ctx = canvas.getContext('2d');
 		
-		ctx.font = '51px Oswald';
-		ctx.textAlign = 'center';
-		ctx.textBaseline = 'middle';
-		ctx.fillStyle = 'red';
-		
 		var minit='';
 		(function loop() {
-		
 		
 		if(new Date().getMinutes()!==minit){
 			minit = new Date().getMinutes();
@@ -75,19 +69,26 @@
 				
 				canvas.style.left = prof.left+'px';
 				canvas.style.top = prof.top+'px';
+				canvas.width = prof.width;
+				canvas.height = prof.height;
+				console.log(canvas);
 			});
 			imgArray.splice(num,1)
 
 		}
 		
-		
+				
+			ctx.font = ((canvas.width + canvas.height) / 6) + 'px Oswald';
+			// ctx.textAlign = 'center';
+			// ctx.textBaseline = 'middle';
+			ctx.fillStyle = 'red';
+
 			ctx.clearRect(0,0,canvas.width,canvas.height);
 			
 			var time = new Date();
 			var text = padZero(time.getHours())+':'+padZero(time.getMinutes())+':'+padZero(time.getSeconds());
 
-			ctx.fillText(text, 100, 50);
-
+			ctx.fillText(text, canvas.width/10,canvas.height - canvas.height/5);
 			setTimeout(loop, 200);
 		})();
 		
