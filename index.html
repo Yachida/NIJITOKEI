@@ -65,7 +65,7 @@
 			$.get(imgArray[num]+".json", function(data){
 				prof = data;
 				
-				$('#canvasFrame').css('background-image', 'url(' + prof.file);
+				$('#canvasFrame').css('background-image', 'url(' + prof.file + ')');
 				
 				canvas.style.left = prof.left+'px';
 				canvas.style.top = prof.top+'px';
