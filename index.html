@@ -9,7 +9,7 @@
 	<style>
 		body {
 			font-family: 'Oswald', cursive;
-			background: #fcf;
+			background: #BDC3C4;
 			text-align: center;
 			font-size: 36px;
 			color: red;
@@ -17,7 +17,7 @@
 	</style>
 </head>
 <body>
-	<div id="canvasFrame" style="background-size: contain;background-repeat: no-repeat;">
+	<div id="canvasFrame" style="background-size: contain;background-repeat: no-repeat;background-position: center;">
 		<canvas id="mycanvas" width="200" height="100"style="position:absolute;background-color:rgba(255,153,153,0.7);">
 			Canvasに対応したブラウザを使ってください。
 		</canvas>
@@ -37,11 +37,7 @@
 		console.log(conf);
 		
 		var imgArray = getArray(conf.count);
-		
-		console.log(window.innerWidth);
-		console.log(window.outerWidth);
-		console.log($(document).width());
-		
+				
 		$('#canvasFrame').width(window.innerWidth);
 		$('#canvasFrame').height(window.innerHeight);
 		
@@ -64,11 +60,11 @@
 			var prof;
 			$.get(imgArray[num]+".json", function(data){
 				prof = data;
-				
+				console.log(prof);
 				$('#canvasFrame').css('background-image', 'url(' + prof.file + ')');
-				
-				canvas.style.left = prof.left+'px';
-				canvas.style.top = prof.top+'px';
+				// 座標は割合で返すメソッドを用意する。
+				canvas.style.left = ($('#canvasFrame').width() / 2) + prof.left + 'px';
+				canvas.style.top = ($('#canvasFrame').height() / 2) + prof.top + 'px';
 				canvas.width = prof.width;
 				canvas.height = prof.height;
 				console.log(canvas);
@@ -88,7 +84,7 @@
 			var time = new Date();
 			var text = padZero(time.getHours())+':'+padZero(time.getMinutes())+':'+padZero(time.getSeconds());
 
-			ctx.fillText(text, canvas.width/10,canvas.height - canvas.height/5);
+			ctx.fillText(text, canvas.width/16,canvas.height - canvas.height/4);
 			setTimeout(loop, 200);
 		})();
 		
