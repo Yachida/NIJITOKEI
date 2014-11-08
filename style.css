@@ -1,0 +1,27 @@
+@charset "utf-8";
+body {
+	font-family: 'Oswald', cursive;
+	background: #BDC3C4;
+	text-align: center;
+	font-size: 36px;
+	color: red;
+}
+#canvasFrame {
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+#mycanvas {
+	position:absolute;
+	background-color:rgba(255,153,153,0.7);
+}
+.fadein {
+	opacity: 1.0;
+	-moz-transition: opacity 1s;
+	-webkit-transition: opacity 1s;
+}
+.fadeout {
+	opacity: 0.0;
+	-moz-transition: opacity 1s;
+	-webkit-transition: opacity 1s;
+}

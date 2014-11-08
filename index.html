@@ -4,21 +4,13 @@
 	<meta charset="UTF-8">
 	<title>T</title>
 	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.17.2/build/cssreset/cssreset-min.css">
-	<link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+	<link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Oswald'>
+	<link rel="stylesheet" type="text/css" href="style.css">
 	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-	<style>
-		body {
-			font-family: 'Oswald', cursive;
-			background: #BDC3C4;
-			text-align: center;
-			font-size: 36px;
-			color: red;
-		}
-	</style>
 </head>
 <body>
-	<div id="canvasFrame" style="background-size: contain;background-repeat: no-repeat;background-position: center;">
-		<canvas id="mycanvas" width="200" height="100"style="position:absolute;background-color:rgba(255,153,153,0.7);">
+	<div id="canvasFrame" class="fadeout">
+		<canvas id="mycanvas" width="200" height="100">
 			Canvasに対応したブラウザを使ってください。
 		</canvas>
 	</div>
@@ -29,6 +21,7 @@
 		$.get("app.json", function(data){
 			conf = data;
 			draw();
+			$('#canvasFrame').addClass("fadein").removeClass("fadeout");
 		});
 	}
 	function draw() {
@@ -49,9 +42,17 @@
 		
 		var minit='';
 		(function loop() {
+		var time = new Date();
 		
-		if(new Date().getMinutes()!==minit){
-			minit = new Date().getMinutes();
+		if(time.getSeconds() === 59){
+			$('#canvasFrame').addClass("fadeout").removeClass("fadein");
+		}
+		if(time.getSeconds() === 0){
+			$('#canvasFrame').addClass("fadein").removeClass("fadeout");
+		}
+		
+		if(time.getMinutes()!==minit){
+			minit = time.getMinutes();
 			
 			if(!imgArray.length){
 				imgArray = getArray(conf.count);
@@ -81,7 +82,6 @@
 
 			ctx.clearRect(0,0,canvas.width,canvas.height);
 			
-			var time = new Date();
 			var text = padZero(time.getHours())+':'+padZero(time.getMinutes())+':'+padZero(time.getSeconds());
 
 			ctx.fillText(text, canvas.width/16,canvas.height - canvas.height/4);
