@@ -76,9 +76,10 @@
 		
 				
 			ctx.font = ((canvas.width + canvas.height) / 6) + 'px Oswald';
-			// ctx.textAlign = 'center';
-			// ctx.textBaseline = 'middle';
-			ctx.fillStyle = 'red';
+			ctx.fillStyle = 'black';
+			ctx.shadowColor = 'white';
+			ctx.shadowOffsetX = 1;
+			ctx.shadowOffsetY = 1;
 
 			ctx.clearRect(0,0,canvas.width,canvas.height);
 			
