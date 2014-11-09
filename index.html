@@ -9,7 +9,7 @@
 	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 </head>
 <body>
-	<div id="canvasFrame" class="fadeout">
+	<div id="wrap" class="fadeout">
 		<canvas id="mycanvas" width="200" height="100">
 			Canvasに対応したブラウザを使ってください。
 		</canvas>
@@ -21,7 +21,7 @@
 		$.get("app.json", function(data){
 			conf = data;
 			draw();
-			$('#canvasFrame').addClass("fadein").removeClass("fadeout");
+			$('#wrap').addClass("fadein").removeClass("fadeout");
 		});
 	}
 	function draw() {
@@ -31,8 +31,8 @@
 		
 		var imgArray = getArray(conf.count);
 				
-		$('#canvasFrame').width(window.innerWidth);
-		$('#canvasFrame').height(window.innerHeight);
+		$('#wrap').width(window.innerWidth);
+		$('#wrap').height(window.innerHeight);
 		
 		canvas.style.left = '150px';
 		canvas.style.top = '500px';
@@ -45,10 +45,10 @@
 		var time = new Date();
 		
 		if(time.getSeconds() === 59){
-			$('#canvasFrame').addClass("fadeout").removeClass("fadein");
+			$('#wrap').addClass("fadeout").removeClass("fadein");
 		}
 		if(time.getSeconds() === 0){
-			$('#canvasFrame').addClass("fadein").removeClass("fadeout");
+			$('#wrap').addClass("fadein").removeClass("fadeout");
 		}
 		
 		if(time.getMinutes()!==minit){
@@ -62,10 +62,10 @@
 			$.get(imgArray[num]+".json", function(data){
 				prof = data;
 				console.log(prof);
-				$('#canvasFrame').css('background-image', 'url(' + prof.file + ')');
+				$('#wrap').css('background-image', 'url(' + prof.file + ')');
 				// 座標は割合で返すメソッドを用意する。
-				canvas.style.left = ($('#canvasFrame').width() / 2) + prof.left + 'px';
-				canvas.style.top = ($('#canvasFrame').height() / 2) + prof.top + 'px';
+				canvas.style.left = ($('#wrap').width() / 2) + prof.left + 'px';
+				canvas.style.top = ($('#wrap').height() / 2) + prof.top + 'px';
 				canvas.width = prof.width;
 				canvas.height = prof.height;
 				console.log(canvas);

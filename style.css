@@ -6,7 +6,7 @@ body {
 	font-size: 36px;
 	color: red;
 }
-#canvasFrame {
+#wrap {
 	background-size: contain;
 	background-repeat: no-repeat;
 	background-position: center;
