@@ -15,3 +15,11 @@ function getArray(count){
 	}
 	return tmpArr
 }
+
+function seekSize(src,dst){
+  return (src / 2) + ((src / 2) * dst /100 );
+}
+
+function seekLength(src,dst){
+  return src * (dst / 100);
+}

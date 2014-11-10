@@ -1,8 +1,10 @@
 {
   "file":"3.jpg"
  ,"name":"名前３"
- ,"left":-230
- ,"top":-250
- ,"width":120
- ,"height":60
+ ,"left":17
+ ,"top":70
+ ,"width":13
+ ,"height":13
+ ,"imgwidth":600
+ ,"imgheight":800
 }

@@ -30,12 +30,10 @@
 		console.log(conf);
 		
 		var imgArray = getArray(conf.count);
-				
+		
+		// 画像サイズに合わせる
 		$('#wrap').width(window.innerWidth);
 		$('#wrap').height(window.innerHeight);
-		
-		canvas.style.left = '150px';
-		canvas.style.top = '500px';
 		
 		if (!canvas || !canvas.getContext('2d')) { return false; }
 		var ctx = canvas.getContext('2d');
@@ -63,12 +61,13 @@
 				prof = data;
 				console.log(prof);
 				$('#wrap').css('background-image', 'url(' + prof.file + ')');
-				// 座標は割合で返すメソッドを用意する。
-				canvas.style.left = ($('#wrap').width() / 2) + prof.left + 'px';
-				canvas.style.top = ($('#wrap').height() / 2) + prof.top + 'px';
-				canvas.width = prof.width;
-				canvas.height = prof.height;
+				
+				canvas.style.left = seekSize($('#wrap').width(), prof.left) + 'px';
+				canvas.style.top = seekSize($('#wrap').height(), prof.top) + 'px';
+				canvas.width = seekLength($('#wrap').width(), prof.width);
+				canvas.height = seekLength($('#wrap').height(), prof.height);
 				console.log(canvas);
+				
 			});
 			imgArray.splice(num,1)
 
