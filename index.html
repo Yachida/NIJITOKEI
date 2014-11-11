@@ -29,7 +29,7 @@
 		
 		console.log(conf);
 		
-		var imgArray = getArray(conf.count);
+		var imgArray = conf.validImg.concat();
 		
 		// 画像サイズに合わせる
 		$('#wrap').width(window.innerWidth);
@@ -51,15 +51,11 @@
 		
 		if(time.getMinutes()!==minit){
 			minit = time.getMinutes();
-			
 			if(!imgArray.length){
-				imgArray = getArray(conf.count);
+				imgArray = conf.validImg.concat();
 			}
 			var num = getRandom(imgArray.length);
-			var prof;
-			$.get(imgArray[num]+".json", function(data){
-				prof = data;
-				console.log(prof);
+			$.get(imgArray[num]+".json", function(prof){
 				$('#wrap').css('background-image', 'url(' + prof.file + ')');
 				
 				canvas.style.left = seekSize($('#wrap').width(), prof.left) + 'px';
