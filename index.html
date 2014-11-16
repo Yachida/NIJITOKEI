@@ -31,10 +31,6 @@
 		
 		var imgArray = conf.validImg.concat();
 		
-		// 画像サイズに合わせる
-		$('#wrap').width(window.innerWidth);
-		$('#wrap').height(window.innerHeight);
-		
 		if (!canvas || !canvas.getContext('2d')) { return false; }
 		var ctx = canvas.getContext('2d');
 		
@@ -57,6 +53,16 @@
 			var num = getRandom(imgArray.length);
 			$.get(imgArray[num]+".json", function(prof){
 				$('#wrap').css('background-image', 'url(' + prof.file + ')');
+				
+				if(prof.imgwidth / window.innerWidth > prof.imgheight / window.innerHeight){
+					// 横に合わせる
+					$('#wrap').width(window.innerWidth);
+					$('#wrap').height((prof.imgheight * window.innerWidth) / prof.imgwidth);
+				} else {
+					// 縦に合わせる
+					$('#wrap').height(window.innerHeight);
+					$('#wrap').width((prof.imgwidth * window.innerHeight) / prof.imgheight);
+				}
 				
 				canvas.style.left = seekSize($('#wrap').width(), prof.left) + 'px';
 				canvas.style.top = seekSize($('#wrap').height(), prof.top) + 'px';
