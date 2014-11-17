@@ -56,18 +56,18 @@
 				
 				if(prof.imgwidth / window.innerWidth > prof.imgheight / window.innerHeight){
 					// 横に合わせる
-					$('#wrap').width(window.innerWidth);
-					$('#wrap').height((prof.imgheight * window.innerWidth) / prof.imgwidth);
+					$('#wrap').width(Math.round(window.innerWidth));
+					$('#wrap').height(Math.round((prof.imgheight * window.innerWidth) / prof.imgwidth));
 				} else {
 					// 縦に合わせる
-					$('#wrap').height(window.innerHeight);
-					$('#wrap').width((prof.imgwidth * window.innerHeight) / prof.imgheight);
+					$('#wrap').height(Math.round(window.innerHeight));
+					$('#wrap').width(Math.round((prof.imgwidth * window.innerHeight) / prof.imgheight));
 				}
 				
 				canvas.style.left = seekSize($('#wrap').width(), prof.left) + 'px';
 				canvas.style.top = seekSize($('#wrap').height(), prof.top) + 'px';
-				canvas.width = seekLength($('#wrap').width(), prof.width);
-				canvas.height = seekLength($('#wrap').height(), prof.height);
+				canvas.width = seekSize($('#wrap').width(), prof.right)-seekSize($('#wrap').width(), prof.left);
+				canvas.height = seekSize($('#wrap').height(), prof.bottom)-seekSize($('#wrap').height(), prof.top);
 				console.log(canvas);
 				
 			});

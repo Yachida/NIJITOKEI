@@ -2,9 +2,9 @@
   "file":"1.jpg"
  ,"name":"名前１"
  ,"left":-15
- ,"top":65
- ,"width":20
- ,"height":10
+ ,"top":60
+ ,"right":30
+ ,"bottom":80
  ,"imgwidth":610
  ,"imgheight":618
 }

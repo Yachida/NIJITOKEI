@@ -9,9 +9,5 @@ function getRandom(n){
 }
 
 function seekSize(src,dst){
-  return (src / 2) + ((src / 2) * dst /100 );
-}
-
-function seekLength(src,dst){
-  return src * (dst / 100);
+  return Math.round((src / 2) + ((src / 2) * dst /100 ));
 }
