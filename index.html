@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+	<meta charset="UTF-8">
+	<title>T</title>
+	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.17.2/build/cssreset/cssreset-min.css">
+	<link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Oswald'>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+</head>
+<body>
+	<div id="wrap" class="fadeout">
+		<canvas id="mycanvas" width="200" height="100">
+			Canvasに対応したブラウザを使ってください。
+		</canvas>
+	</div>
+	<script src="./lib.js"></script>
+	<script>
+	var conf;
+	window.onload = function() {
+		$.get("app.json", function(data){
+			conf = data;
+			draw();
+			$('#wrap').addClass("fadein").removeClass("fadeout");
+		});
+	}
+	function draw() {
+		var canvas = document.getElementById('mycanvas');
+		
+		console.log(conf);
+		
+		var imgArray = conf.validImg.concat();
+		
+		if (!canvas || !canvas.getContext('2d')) { return false; }
+		var ctx = canvas.getContext('2d');
+		
+		var minit='';
+		(function loop() {
+		var time = new Date();
+		
+		if(time.getSeconds() === 59){
+			$('#wrap').addClass("fadeout").removeClass("fadein");
+		}
+		if(time.getSeconds() === 0){
+			$('#wrap').addClass("fadein").removeClass("fadeout");
+		}
+		
+		if(time.getMinutes()!==minit){
+			minit = time.getMinutes();
+			if(!imgArray.length){
+				imgArray = conf.validImg.concat();
+			}
+			var num = getRandom(imgArray.length);
+			$.get(imgArray[num]+".json", function(prof){
+				$('#wrap').css('background-image', 'url(' + prof.file + ')');
+				
+				if(prof.imgwidth / window.innerWidth > prof.imgheight / window.innerHeight){
+					// 横に合わせる
+					$('#wrap').width(Math.round(window.innerWidth));
+					$('#wrap').height(Math.round((prof.imgheight * window.innerWidth) / prof.imgwidth));
+				} else {
+					// 縦に合わせる
+					$('#wrap').height(Math.round(window.innerHeight));
+					$('#wrap').width(Math.round((prof.imgwidth * window.innerHeight) / prof.imgheight));
+				}
+				
+				canvas.style.left = seekSize($('#wrap').width(), prof.left) + 'px';
+				canvas.style.top = seekSize($('#wrap').height(), prof.top) + 'px';
+				canvas.width = seekSize($('#wrap').width(), prof.right)-seekSize($('#wrap').width(), prof.left);
+				canvas.height = seekSize($('#wrap').height(), prof.bottom)-seekSize($('#wrap').height(), prof.top);
+				console.log(canvas);
+				
+			});
+			imgArray.splice(num,1)
+
+		}
+		
+				
+			ctx.font = ((canvas.width + canvas.height) / 6) + 'px Oswald';
+			ctx.fillStyle = 'black';
+			ctx.shadowColor = 'white';
+			ctx.shadowOffsetX = 1;
+			ctx.shadowOffsetY = 1;
+
+			ctx.clearRect(0,0,canvas.width,canvas.height);
+			
+			var text = padZero(time.getHours())+':'+padZero(time.getMinutes())+':'+padZero(time.getSeconds());
+
+			ctx.fillText(text, canvas.width/16,canvas.height - canvas.height/4);
+			setTimeout(loop, 200);
+		})();
+		
+	}
+	</script>
+
+</body>
+</html>
