@@ -11,3 +11,11 @@ function getRandom(n){
 function seekSize(src,dst){
   return Math.round((src / 2) + ((src / 2) * dst /100 ));
 }
+
+function arrayCopy(src){
+  var dst = [];
+  for(var d in src){
+    dst[dst.length] = src[d];
+  }
+  return dst;
+}
