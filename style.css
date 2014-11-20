@@ -9,8 +9,6 @@ body {
 	font-family: 'Oswald', cursive;
 	background: #BDC3C4;
 	text-align: center;
-	font-size: 36px;
-	color: red;
 }
 #wrap {
 margin:0 auto;
@@ -22,6 +20,8 @@ margin:0 auto;
 	background-size: contain;
 	background-repeat: no-repeat;
 	background-position: center;
+}
+#info {
 }
 #mycanvas {
 	position:absolute;
