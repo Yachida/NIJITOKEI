@@ -9,8 +9,8 @@
 	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 </head>
 <body>
-	<div id="wrap" class="fadeout">
-		<div id="info" style="background-color:rgba(153,255,153,0.2);">info</div>
+	<div id="wrap" class="fade fadeout">
+		<div id="info">info</div>
 		<canvas id="mycanvas" width="200" height="100">
 			Canvasに対応したブラウザを使ってください。
 		</canvas>
@@ -74,11 +74,11 @@
 			$('#info').height(seekSize(window.innerHeight, -90)-seekSize(window.innerHeight, -100));
 			$('#info').css('font-size',Math.round((seekSize(window.innerHeight, -90)-seekSize(window.innerHeight, -100)) * 0.6)+"px");
 			
-//			if (time.getSeconds()%10 - 2 === 0){
-//				$('#info').slideDown("fast");
-//			} else if (time.getSeconds()%10 === 0){
-//				$('#info').slideUp("fast");
-//			}
+			if (time.getSeconds()%10 < 9){
+				$('#info').slideDown("fast");
+			} else {
+				$('#info').slideUp("fast");
+			}
 
 			ctx.font = ((canvas.width + canvas.height) / 6) + 'px Oswald';
 			ctx.fillStyle = 'black';

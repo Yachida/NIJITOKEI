@@ -22,18 +22,24 @@ margin:0 auto;
 	background-position: center;
 }
 #info {
+	background-color:rgba(153,255,153,0.2);
+	display:none;
 }
 #mycanvas {
 	position:absolute;
 	background-color:rgba(255,153,153,0.7);
 }
+.fade {
+	transition: opacity 0.5s;
+	-moz-transition: opacity 0.5s;
+	-webkit-transition: opacity 0.5s;
+	-o-transition: opacity 0.5s;
+}
 .fadein {
 	opacity: 1.0;
-	-moz-transition: opacity 1s;
-	-webkit-transition: opacity 1s;
 }
 .fadeout {
 	opacity: 0.0;
-	-moz-transition: opacity 1s;
-	-webkit-transition: opacity 1s;
+	transition-delay:0.5s;
+	-webkit-transition-delay:0.5s;
 }
