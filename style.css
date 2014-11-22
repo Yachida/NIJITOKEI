@@ -22,8 +22,10 @@ margin:0 auto;
 	background-position: center;
 }
 #info {
-	background-color:rgba(153,255,153,0.2);
+	background-color:rgba(35,195,251,0.8);
 	display:none;
+	padding: 0 1%;
+	text-align:left;
 }
 #mycanvas {
 	position:absolute;

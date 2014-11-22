@@ -1,10 +1,30 @@
 {
   "file":"1.jpg"
- ,"name":"名前１"
  ,"left":-15
  ,"top":60
  ,"right":30
  ,"bottom":80
  ,"imgwidth":610
  ,"imgheight":618
+ ,"info":[
+   {
+     "label":"情報１"
+    ,"value":"内容１"
+   }, {
+     "label":"情報２"
+    ,"value":"内容２"
+   }, {
+     "label":"情報３"
+    ,"value":"内容３"
+   }, {
+     "label":"情報４"
+    ,"value":"内容４"
+   }, {
+     "label":"情報５"
+    ,"value":"内容５"
+   }, {
+     "label":"情報６"
+    ,"value":"内容６"
+   }
+ ]
 }

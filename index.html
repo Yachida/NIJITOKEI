@@ -27,7 +27,7 @@
 	}
 	function draw() {
 		var canvas = document.getElementById('mycanvas');
-		
+		var desc;
 		var imgArray = arrayCopy(conf.validImg);
 		
 		if (!canvas || !canvas.getContext('2d')) { return false; }
@@ -48,6 +48,7 @@
 				}
 				var num = getRandom(imgArray.length);
 				$.get(imgArray[num]+".json", function(prof){
+					desc = prof.info;
 					$('#wrap').css('background-image', 'url(./' + prof.file + ')');
 					
 					if(prof.imgwidth / window.innerWidth > prof.imgheight / window.innerHeight){
@@ -74,9 +75,10 @@
 			$('#info').height(seekSize(window.innerHeight, -90)-seekSize(window.innerHeight, -100));
 			$('#info').css('font-size',Math.round((seekSize(window.innerHeight, -90)-seekSize(window.innerHeight, -100)) * 0.6)+"px");
 			
-			if (time.getSeconds()%10 < 9){
+			if ((time.getSeconds()%10 < 9) && $('#info').css("display") === "none" ){
+				console.log(desc);
 				$('#info').slideDown("fast");
-			} else {
+			} else if (time.getSeconds()%10 === 9 && $('#info').css("display") === "block"){
 				$('#info').slideUp("fast");
 			}
 
