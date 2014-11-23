@@ -1,10 +1,27 @@
 {
   "file":"2.jpg"
- ,"name":"名前２"
  ,"left":-80
  ,"top":15
  ,"right":-28
  ,"bottom":35
  ,"imgwidth":600
  ,"imgheight":800
+ ,"info":[
+   {
+     "label":"2情報１"
+    ,"value":"2内容１"
+   }, {
+     "label":"2情報２"
+    ,"value":"2内容２"
+   }, {
+     "label":"2情報３"
+    ,"value":"2内容３"
+   }, {
+     "label":"2情報４"
+    ,"value":"2内容４"
+   }, {
+     "label":"2情報５"
+    ,"value":"2内容５"
+   }
+ ]
 }

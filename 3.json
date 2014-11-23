@@ -1,10 +1,24 @@
 {
   "file":"3.jpg"
- ,"name":"名前３"
  ,"left":17
  ,"top":70
  ,"right":55
  ,"bottom":86
  ,"imgwidth":210
  ,"imgheight":280
+ ,"info":[
+   {
+     "label":"3情報１"
+    ,"value":"3内容１"
+   }, {
+     "label":"3情報２"
+    ,"value":"3内容２"
+   }, {
+     "label":"3情報３"
+    ,"value":"3内容３"
+   }, {
+     "label":"3情報４"
+    ,"value":"3内容４"
+   }
+ ]
 }

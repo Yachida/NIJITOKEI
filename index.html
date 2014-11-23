@@ -29,6 +29,7 @@
 	function draw() {
 		var canvas = document.getElementById('mycanvas');
 		var desc;
+		var currentInfo;
 		var imgArray = _.shuffle(conf.validImg);
 		
 		if (!canvas || !canvas.getContext('2d')) { return false; }
@@ -44,6 +45,8 @@
 			
 			if(time.getMinutes()!==minit){
 				minit = time.getMinutes();
+				currentInfo = 0;
+				desc = null;
 				if(!_.size(imgArray)){
 					imgArray = _.shuffle(conf.validImg);
 				}
@@ -75,8 +78,9 @@
 			$('#info').height(seekSize(window.innerHeight, -90)-seekSize(window.innerHeight, -100));
 			$('#info').css('font-size',Math.round((seekSize(window.innerHeight, -90)-seekSize(window.innerHeight, -100)) * 0.6)+"px");
 			
-			if ((time.getSeconds()%10 < 9) && $('#info').css("display") === "none" ){
-				console.log(desc);
+			if (time.getSeconds()%10 < 9 && ($('#info').css("display") === "none") && !!desc){
+				$('#info').text(desc[currentInfo].label + " : " + desc[currentInfo].value);
+				currentInfo = _.size(desc) <= currentInfo + 1 ? 0 : currentInfo + 1;
 				$('#info').slideDown("fast");
 			} else if (time.getSeconds()%10 === 9 && $('#info').css("display") === "block"){
 				$('#info').slideUp("fast");

@@ -8,23 +8,23 @@
  ,"imgheight":618
  ,"info":[
    {
-     "label":"情報１"
-    ,"value":"内容１"
+     "label":"1情報１"
+    ,"value":"1内容１"
    }, {
-     "label":"情報２"
-    ,"value":"内容２"
+     "label":"1情報２"
+    ,"value":"1内容２"
    }, {
-     "label":"情報３"
-    ,"value":"内容３"
+     "label":"1情報３"
+    ,"value":"1内容３"
    }, {
-     "label":"情報４"
-    ,"value":"内容４"
+     "label":"1情報４"
+    ,"value":"1内容４"
    }, {
-     "label":"情報５"
-    ,"value":"内容５"
+     "label":"1情報５"
+    ,"value":"1内容５"
    }, {
-     "label":"情報６"
-    ,"value":"内容６"
+     "label":"1情報６"
+    ,"value":"1内容６"
    }
  ]
 }
