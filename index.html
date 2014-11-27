@@ -12,10 +12,12 @@
 <body>
 	<div id="wrap" class="fade fadeout">
 		<div id="info">info</div>
-		<div id="timer"></div>
+		<div id="timer">00:00:00</div>
+<!-- 
 		<canvas id="mycanvas" width="200" height="100">
 			Canvasに対応したブラウザを使ってください。
 		</canvas>
+ -->
 	</div>
 	<script src="./lib.js"></script>
 	<script>
@@ -28,13 +30,13 @@
 		});
 	}
 	function draw() {
-		var canvas = document.getElementById('mycanvas');
+//		var canvas = document.getElementById('mycanvas');
 		var desc;
 		var currentInfo;
 		var imgArray = _.shuffle(conf.validImg);
 		
-		if (!canvas || !canvas.getContext('2d')) { return false; }
-		var ctx = canvas.getContext('2d');
+//		if (!canvas || !canvas.getContext('2d')) { return false; }
+//		var ctx = canvas.getContext('2d');
 		
 		var minit='';
 		(function loop() {
@@ -65,10 +67,16 @@
 						$('#wrap').width(Math.round((prof.imgwidth * window.innerHeight) / prof.imgheight));
 					}
 					
-					canvas.style.left = seekSize($('#wrap').width(), prof.left) + 'px';
-					canvas.style.top = seekSize($('#wrap').height(), prof.top) + 'px';
-					canvas.width = seekSize($('#wrap').width(), prof.right)-seekSize($('#wrap').width(), prof.left);
-					canvas.height = seekSize($('#wrap').height(), prof.bottom)-seekSize($('#wrap').height(), prof.top);
+//					canvas.style.left = seekSize($('#wrap').width(), prof.left) + 'px';
+//					canvas.style.top = seekSize($('#wrap').height(), prof.top) + 'px';
+//					canvas.width = seekSize($('#wrap').width(), prof.right)-seekSize($('#wrap').width(), prof.left);
+//					canvas.height = seekSize($('#wrap').height(), prof.bottom)-seekSize($('#wrap').height(), prof.top);
+					
+					$("#timer").css("left", seekSize($('#wrap').width(), prof.left));
+					$("#timer").css("top", seekSize($('#wrap').height(), prof.top));
+					$("#timer").width(seekSize($('#wrap').width(), prof.right)-seekSize($('#wrap').width(), prof.left));
+					$("#timer").height(seekSize($('#wrap').height(), prof.bottom)-seekSize($('#wrap').height(), prof.top));
+					$("#timer").css('font-size',(($("#timer").width() + $("#timer").height()) / 5.5)+"px");
 					
 					$('#wrap').addClass("fadein").removeClass("fadeout");
 					
@@ -87,17 +95,18 @@
 				$('#info').slideUp("fast");
 			}
 
-			ctx.font = ((canvas.width + canvas.height) / 6) + 'px Oswald';
-			ctx.fillStyle = 'black';
-			ctx.shadowColor = 'white';
-			ctx.shadowOffsetX = 1;
-			ctx.shadowOffsetY = 1;
+//			ctx.font = ((canvas.width + canvas.height) / 6) + 'px Oswald';
+//			ctx.fillStyle = 'black';
+//			ctx.shadowColor = 'white';
+//			ctx.shadowOffsetX = 1;
+//			ctx.shadowOffsetY = 1;
 
-			ctx.clearRect(0,0,canvas.width,canvas.height);
+//			ctx.clearRect(0,0,canvas.width,canvas.height);
 			
-			var text = padZero(time.getHours())+':'+padZero(time.getMinutes())+':'+padZero(time.getSeconds());
+//			var text = padZero(time.getHours())+':'+padZero(time.getMinutes())+':'+padZero(time.getSeconds());
+			$("#timer").text(padZero(time.getHours())+':'+padZero(time.getMinutes())+':'+padZero(time.getSeconds()));
 
-			ctx.fillText(text, canvas.width/16,canvas.height - canvas.height/4);
+//			ctx.fillText(text, canvas.width/16,canvas.height - canvas.height/4);
 			setTimeout(loop, 200);
 		})();
 		
