@@ -84,7 +84,7 @@
 				imgArray = _.rest(imgArray);
 			}
 			
-			$('#info').height(seekSize(window.innerHeight, -90)-seekSize(window.innerHeight, -100));
+			$('#info').css('min-height',(seekSize(window.innerHeight, -90)-seekSize(window.innerHeight, -100)));
 			$('#info').css('font-size',Math.round((seekSize(window.innerHeight, -90)-seekSize(window.innerHeight, -100)) * 0.6)+"px");
 			
 			if (time.getSeconds()%10 < 9 && ($('#info').css("display") === "none") && !!desc){

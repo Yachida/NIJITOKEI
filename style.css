@@ -27,6 +27,7 @@ margin:0 auto;
 	padding: 0 1%;
 	text-align:left;
 	overflow-x:hidden;
+	word-wrap: break-word;
 }
 /*
 #mycanvas {
