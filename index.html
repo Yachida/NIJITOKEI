@@ -48,14 +48,14 @@
 					desc = prof.info;
 					$('#wrap').css('background-image', 'url(./' + prof.file + ')');
 					
-					if(prof.imgwidth / window.innerWidth > prof.imgheight / window.innerHeight){
+					if(prof.imgwidth / $(window).innerWidth() > prof.imgheight / $(window).innerHeight()){
 						// 横に合わせる
-						$('#wrap').width(Math.round(window.innerWidth));
-						$('#wrap').height(Math.round((prof.imgheight * window.innerWidth) / prof.imgwidth));
+						$('#wrap').width(Math.round($(window).innerWidth()));
+						$('#wrap').height(Math.round((prof.imgheight * $(window).innerWidth()) / prof.imgwidth));
 					} else {
 						// 縦に合わせる
-						$('#wrap').height(Math.round(window.innerHeight));
-						$('#wrap').width(Math.round((prof.imgwidth * window.innerHeight) / prof.imgheight));
+						$('#wrap').height(Math.round($(window).innerHeight()));
+						$('#wrap').width(Math.round((prof.imgwidth * $(window).innerHeight()) / prof.imgheight));
 					}
 					
 					$("#timer").css("left", seekSize($('#wrap').width(), prof.left));
@@ -70,7 +70,7 @@
 				imgArray = _.rest(imgArray);
 			}
 			
-			$('#info').css('font-size',Math.round((seekSize(window.innerHeight, -90)-seekSize(window.innerHeight, -100)) * 0.6)+"px");
+			$('#info').css('font-size',Math.round((seekSize($(window).innerHeight(), -90)-seekSize($(window).innerHeight(), -100)) * 0.6)+"px");
 			
 			if (time.getSeconds()%10 < 9 && ($('#info').css("display") === "none") && !!desc){
 				$('#info').text(desc[currentInfo].label + " : " + desc[currentInfo].value);
