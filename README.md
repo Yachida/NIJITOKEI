@@ -1,4 +1,4 @@
-NIJITOKEI 0.2.0
+NIJITOKEI 0.2.1
 =========
 
 
