@@ -17,19 +17,27 @@
 	<script src="./lib.js"></script>
 	<script>
 	var conf;
+	var imgArray = [];
 	window.onload = function() {
 		$.get("app.json", function(data){
 			conf = data;
+			for(var i in conf.validImg){
+				$.get("./info/" + conf.validImg[i] + ".json", function(data){
+					imgArray[_.size(imgArray)] = data;
+				});
+			}
 			draw();
-			$('#wrap').addClass("fadein").removeClass("fadeout");
+			if(_.size(imgArray)){
+				$('#wrap').addClass("fadein").removeClass("fadeout");
+			}
 		});
 	}
 	function draw() {
 		var desc;
 		var currentInfo;
-		var imgArray = _.shuffle(conf.validImg);
 		
 		var minit='';
+		var prof='';
 		(function loop() {
 			var time = new Date();
 			
@@ -37,25 +45,28 @@
 				$('#wrap').addClass("fadeout").removeClass("fadein");
 			}
 			
-			if(time.getMinutes()!==minit){
+			if(time.getMinutes()!==minit && _.size(imgArray)){
 				minit = time.getMinutes();
 				currentInfo = 0;
 				desc = null;
-				if(!_.size(imgArray)){
-					imgArray = _.shuffle(conf.validImg);
+				
+				if(_.size(imgArray) <= _.indexOf(imgArray,prof)+1){
+					imgArray = _.shuffle(imgArray);
+					prof = '';
 				}
-				$.get(_.first(imgArray)+".json", function(prof){
+				
+				prof = imgArray[_.indexOf(imgArray,prof) + 1];
 					desc = prof.info;
-					$('#wrap').css('background-image', 'url(./' + prof.file + ')');
+					$('#wrap').css('background-image', 'url(./img/' + prof.file + ')');
 					
-					if(prof.imgwidth / window.innerWidth > prof.imgheight / window.innerHeight){
+					if(prof.imgwidth / $(window).innerWidth() > prof.imgheight / $(window).innerHeight()){
 						// 横に合わせる
-						$('#wrap').width(Math.round(window.innerWidth));
-						$('#wrap').height(Math.round((prof.imgheight * window.innerWidth) / prof.imgwidth));
+						$('#wrap').width(Math.round($(window).innerWidth()));
+						$('#wrap').height(Math.round((prof.imgheight * $(window).innerWidth()) / prof.imgwidth));
 					} else {
 						// 縦に合わせる
-						$('#wrap').height(Math.round(window.innerHeight));
-						$('#wrap').width(Math.round((prof.imgwidth * window.innerHeight) / prof.imgheight));
+						$('#wrap').height(Math.round($(window).innerHeight()));
+						$('#wrap').width(Math.round((prof.imgwidth * $(window).innerHeight()) / prof.imgheight));
 					}
 					
 					$("#timer").css("left", seekSize($('#wrap').width(), prof.left));
@@ -65,13 +76,9 @@
 					$("#timer").css('font-size',(($("#timer").width() + $("#timer").height()) / 5.5)+"px");
 					
 					$('#wrap').addClass("fadein").removeClass("fadeout");
-					
-				});
-				imgArray = _.rest(imgArray);
 			}
 			
-			$('#info').css('min-height',(seekSize(window.innerHeight, -90)-seekSize(window.innerHeight, -100)));
-			$('#info').css('font-size',Math.round((seekSize(window.innerHeight, -90)-seekSize(window.innerHeight, -100)) * 0.6)+"px");
+			$('#info').css('font-size',Math.round((seekSize($(window).innerHeight(), -90)-seekSize($(window).innerHeight(), -100)) * 0.6)+"px");
 			
 			if (time.getSeconds()%10 < 9 && ($('#info').css("display") === "none") && !!desc){
 				$('#info').text(desc[currentInfo].label + " : " + desc[currentInfo].value);
