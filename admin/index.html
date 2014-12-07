@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ja-JP" ng-app>
+<head>
+	<meta charset="UTF-8">
+	<title>T</title>
+	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.17.2/build/cssreset/cssreset-min.css">
+	<link rel="stylesheet" type="text/css" href="admin.css">
+	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js"></script>
+<!--
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js"></script>
+ -->
+</head>
+<body>
+	<div id="validImg">
+		
+	</div>
+	<script src="./ctrl.js"></script>
+	<script>
+	(function() {
+		$.get("./api.php?proc=getListImg", function(data){
+			conf = data;
+			
+			for(var i in conf){
+				console.log(conf[i]);
+				$('#validImg').append("<img src=\"../img/"+conf[i].file+"\" />");
+			}
+			
+		});
+		$.get("./api.php?proc=getValidImg", function(data){
+			console.log(data);
+		});
+		
+	})();
+	</script>
+</body>
+</html>
