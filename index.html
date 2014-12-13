@@ -19,10 +19,10 @@
 	var conf;
 	var imgArray = [];
 	window.onload = function() {
-		$.get("app.json", function(data){
+		$.getJSON("app.json", function(data){
 			conf = data;
 			for(var i in conf.validImg){
-				$.get("./info/" + conf.validImg[i] + ".json", function(data){
+				$.getJSON("./info/" + conf.validImg[i] + ".json", function(data){
 					imgArray[_.size(imgArray)] = data;
 				});
 			}
